@@ -1,0 +1,51 @@
+{
+
+  "name": "colorific",
+  "version": "0.0.1",
+
+  "description": "Text coloring (with ANSI) for nodejs",
+  "author": "Jan Oetjen <oetjenj@gmail.com> (http://phexter.net)",
+  "homepage": "https://github.com/joetjen/node-colorific",
+
+  "main": "./src/index.js",
+  "readmeFilename": "README.md",
+  "license": "MIT",
+
+  "bin": {},
+
+  "dependencies": {
+    "underscore": ">= 1.5.x"
+  },
+
+  "devDependencies": {
+    "mocha": ">= 1.11.x"
+  },
+
+  "engines": {
+    "node": ">= 0.10.x"
+  },
+
+  "scripts": {
+    "test": "cd test && ../node_modules/.bin/mocha --reporter spec",
+    "example": "cd example && node index.js"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/joetjen/node-colorific.git"
+  },
+
+  "bugs": {
+    "url": "https://github.com/joetjen/node-colorific/issues",
+    "email": "oetjenj@gmail.com"
+  },
+
+  "keywords": [
+    "ansi",
+    "colorize",
+    "colors",
+    "color",
+    "console"
+  ]
+
+}
