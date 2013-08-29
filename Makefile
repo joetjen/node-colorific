@@ -11,6 +11,21 @@ run: dependencies
 test: dependencies
 	@npm test
 
+autotest: dependencies
+	@npm run-script autotest
+
+watch: dependencies
+	@npm watch
+
+start: dependencies
+	@npm start
+
+stop: dependencies
+	@npm stop
+
+restart: dependencies
+	@npm restart
+
 example: dependencies
 	@npm run-script example
 
@@ -30,6 +45,11 @@ help:
 	@echo '  dependencies  install package dependencies.'
 	@echo '  run           run the package main script.'
 	@echo '  test          run the package test script.'
+	@echo '  autotest      run the package autotest script.'
+	@echo '  watch         run the package watch script.'
+	@echo '  start         run the package start script.'
+	@echo '  stop          run the package stop script.'
+	@echo '  stop          run the package stop script.'
 	@echo '  example       run the package example script.'
 	@echo '  clean         remove the node_modules subdirectory.'
 	@echo '  install       globally install the package on the system.'

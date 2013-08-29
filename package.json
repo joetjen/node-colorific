@@ -1,17 +1,16 @@
 {
 
-	"name": "colorific",
+	"name":    "colorific",
 	"version": "0.1.0",
 	"private": false,
 
+	"author":      "Jan Oetjen <oetjenj@gmail.com> (http://phexter.net)",
 	"description": "Text coloring (with ANSI) for nodejs",
-	"homepage": "https://github.com/joetjen/node-colorific",
-	"author": "Jan Oetjen <oetjenj@gmail.com> (http://phexter.net)",
+	"homepage":    "https://github.com/joetjen/node-colorific",
 
 	"contributors": {},
 
-	"main": "./src/index.js",
-	"readmeFilename": "README.md",
+	"main":    "./src/index.js",
 	"license": "MIT",
 
 	"bin": {},
@@ -29,17 +28,22 @@
 	},
 
 	"scripts": {
-		"test": "node_modules/.bin/jasmine-node --color spec/",
-		"example": "cd example && node index.js"
+		"test":     "node_modules/.bin/jasmine-node --nocolor spec/",
+		"autotest": "node_modules/.bin/jasmine-node --autotest --watch src/ --nocolor --growl spec/",
+		"watch":    "echo no watch script available!",
+		"start":    "echo no start script available!",
+		"stop":     "echo no stop script available!",
+		"restart":  "echo no restart script available!",
+		"example":  "node example/index.js"
 	},
 
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/joetjen/node-colorific.git"
+		"url":  "git://github.com/joetjen/node-colorific.git"
 	},
 
 	"bugs": {
-		"url": "https://github.com/joetjen/node-colorific/issues",
+		"url":   "https://github.com/joetjen/node-colorific/issues",
 		"email": "oetjenj@gmail.com"
 	},
 
