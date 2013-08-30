@@ -1,13 +1,63 @@
 ###
-# Module dependencies.
+# Module dependencies
+###
+_ = require 'underscore'
+
+###
+# Constants
+###
+CSI  = '\x1b'
+
+ANSI =
+	black:   30,
+	red:     31,
+	green:   32,
+	yellow:  33,
+	blue:    34,
+	magenta: 35,
+	cyan:    36,
+	white:   37,
+	default: 39
+
+###
+#
+###
+code = {}
+
+###
+# Shortcuts
 ###
 
-colorific = (string) ->
-	string
-		.replace /@black:(.*)$/g,  '\x1b[30m$1\x1b[39m'
-		.replace /@red:(.*)$/g,    '\x1b[31m$1\x1b[39m'
-		.replace /@green:(.*)$/g,  '\x1b[32m$1\x1b[39m'
-		.replace /@yellow:(.*)$/g, '\x1b[33m$1\x1b[39m'
-		.replace /@blue:(.*)$/g,   '\x1b[34m$1\x1b[39m'
+log     = console.log
+replace = String::replace
 
+###
+# Functions
+###
+
+ansify = (c...) ->
+	"#{ CSI }[#{ c.join ';' }m"
+
+createCode = (o, c) ->
+	_.extend o, _.object [c], [{
+		regex:   (new RegExp "@#{ c }→(.*)$", 'g'),
+		replace: "#{ ansify ANSI[c] }$1#{ ansify ANSI.default }"
+	}]
+
+replaceCode = (s, c) ->
+	return s if (_.isEmpty c)
+	replaceCode (replace.apply s, _.toArray (_.head c)), _.tail c
+
+colorific = (s) ->
+	replaceCode s, (_.flatten (_.toArray code))
+
+###
+# Initialize module
+###
+
+code = _.reduceRight (_.keys ANSI), createCode, {}
+
+###
+# Exports
+###
 module.exports = colorific
