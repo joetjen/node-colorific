@@ -1,5 +1,6 @@
 {
 
+<<<<<<< HEAD
   "name": "colorific",
   "version": "0.0.1",
 
@@ -47,5 +48,69 @@
     "color",
     "console"
   ]
+=======
+	"name":    "colorific",
+	"version": "0.1.0",
+	"private": false,
+
+	"author":      "Jan Oetjen <oetjenj@gmail.com> (http://phexter.net)",
+	"description": "Text coloring (with ANSI) for nodejs",
+	"homepage":    "https://github.com/joetjen/node-colorific",
+
+	"contributors": {},
+
+	"main":    "./src",
+	"license": "MIT",
+
+	"bin": {},
+
+	"directories": {
+		"bin": "./bin",
+		"lib": "./lib",
+		"src": "./src",
+		"doc": "./doc"
+		},
+
+	"dependencies": {
+		"underscore": ">= 1.5.x"
+	},
+
+	"devDependencies": {
+		"jasmine-node": ">= 1.10.x"
+	},
+
+	"engines": {
+		"node":          ">= 0.10.x",
+		"coffee-script": ">= 1.6.x"
+	},
+
+	"scripts": {
+		"test":     "node_modules/.bin/jasmine-node --coffee --nocolor spec/",
+		"autotest": "node_modules/.bin/jasmine-node --coffee --autotest --watch src/ --nocolor --growl spec/",
+		"watch":    "echo no watch script available!",
+		"start":    "echo no start script available!",
+		"stop":     "echo no stop script available!",
+		"restart":  "echo no restart script available!",
+		"example":  "coffee example/index.coffee"
+	},
+
+	"repository": {
+		"type": "git",
+		"url":  "git://github.com/joetjen/node-colorific.git"
+	},
+
+	"bugs": {
+		"url":   "https://github.com/joetjen/node-colorific/issues",
+		"email": "oetjenj@gmail.com"
+	},
+
+	"keywords": [
+		"ansi",
+		"colorize",
+		"colors",
+		"color",
+		"console"
+	]
+>>>>>>> 28ea466bc6f0e76c4e727c23783acf8c466a1f90
 
 }
