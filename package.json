@@ -10,10 +10,17 @@
 
 	"contributors": {},
 
-	"main":    "./src/index.js",
+	"main":    "./src",
 	"license": "MIT",
 
 	"bin": {},
+
+	"directories": {
+		"bin": "./bin",
+		"lib": "./lib",
+		"src": "./src",
+		"doc": "./doc"
+		},
 
 	"dependencies": {
 		"underscore": ">= 1.5.x"
@@ -24,17 +31,18 @@
 	},
 
 	"engines": {
-		"node": ">= 0.10.x"
+		"node":          ">= 0.10.x",
+		"coffee-script": ">= 1.6.x"
 	},
 
 	"scripts": {
-		"test":     "node_modules/.bin/jasmine-node --nocolor spec/",
-		"autotest": "node_modules/.bin/jasmine-node --autotest --watch src/ --nocolor --growl spec/",
+		"test":     "node_modules/.bin/jasmine-node --coffee --nocolor spec/",
+		"autotest": "node_modules/.bin/jasmine-node --coffee --autotest --watch src/ --nocolor --growl spec/",
 		"watch":    "echo no watch script available!",
 		"start":    "echo no start script available!",
 		"stop":     "echo no stop script available!",
 		"restart":  "echo no restart script available!",
-		"example":  "node example/index.js"
+		"example":  "coffee example/index.coffee"
 	},
 
 	"repository": {
