@@ -1,12 +1,13 @@
-node_modules: package.json
+BIN = ./node_modules/.bin
+SRC = $(wildcard src/*.js)
+LIB = $(SRC:src/%.js=lib/%.min.js)
 
-dependencies: node_modules
-	@npm prune
-	@npm install
-	@npm dedupe
+# build: $(LIB) dependencies
 
 run: dependencies
-	@NODE_PATH=lib node src/index.js
+	@NODE_PATH=lib node index.js
+
+minify: $(LIB) dependencies
 
 test: dependencies
 	@npm test
@@ -31,6 +32,7 @@ example: dependencies
 
 clean:
 	@rm -rf node_modules
+	@rm -rf lib
 
 install:
 	@sudo npm install -g `pwd`
@@ -38,12 +40,17 @@ install:
 publish:
 	@npm publish
 
+dependencies: node_modules
+	@npm prune
+	@npm install
+	@npm dedupe
+
 help:
 	@echo 'Usage: make [options] [target]...'
 	@echo ''
 	@echo 'Targets:'
-	@echo '  dependencies  install package dependencies.'
 	@echo '  run           run the package main script.'
+	@echo '  minify        produce minified versions of the sources.'
 	@echo '  test          run the package test script.'
 	@echo '  autotest      run the package autotest script.'
 	@echo '  watch         run the package watch script.'
@@ -55,8 +62,24 @@ help:
 	@echo '  install       globally install the package on the system.'
 	@echo '                [requires sudo rights]'
 	@echo '  publish       publish the package.'
+	@echo '  dependencies  install package dependencies.'
 	@echo '  help          show this help.'
 	@echo ''
 	@echo 'For possible options use "make --help".'
 
-.PHONY: dependencies run test example clean install publish help
+node_modules: package.json
+
+lib/%.min.js: src/%.js
+	$(call uglifyjs)
+
+define uglifyjs
+	@mkdir -p $(@D)
+	$(BIN)/uglifyjs --mangle sort=true,toplevel=true \
+	                --reserved '$,_,require,exports,modules' \
+	                --compress \
+	                --screw-ie8 \
+	                --output $@ \
+	                $<
+endef
+
+.PHONY: run minify test example clean install publish dependencies help
