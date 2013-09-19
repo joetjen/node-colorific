@@ -3,7 +3,7 @@
 Text coloring (with ANSI) for Node.js.
 
 This package was heavily inspiried by
-Muslim Idris' node-curly-colors](https://npmjs.org/package/curly-colors) and
+[Muslim Idris' node-curly-colors](https://npmjs.org/package/curly-colors) and
 several other ANSI/Color - specific packages available on the npm repository.
 
 The reason - for me - to write yet another coloring package was that I
