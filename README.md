@@ -83,32 +83,46 @@ represent the tag format.
 There are already several tag formats predefined:
 
 * COLORIFIC @@KEY:@TEXT
+
   My default format. Chosen to make be short but still easily distinguishable in
   a string.
+
   Example: @red:this is red
 
 * COLOR_TERMINAL %@KEY@TEXT
+
   Inspired by [color-terminal](https://npmjs.org/package/color-terminal)
+
   Example: %redthis is red
 
 * STYISH #{@KEY \'@TEXT\'}
+
   Inspired by [sty](https://npmjs.org/package/sty)
+
   Example: #{red 'this is red'}
 
 * SGML <@KEY>@TEXT</@KEY>
+
   SGML-like representation of color codes in string.
+
   Example: <red>this is red</red>
 
 * CURLY_COLORS <{@KEY>@TEXT<}>
+
   Inspired by [curly-colors](https://npmjs.org/package/curly-colors)
+
   Example: <{red>this is red<}>
 
 * COLORS_TMPL {@KEY}@TEXT{/@KEY}
+
   Inspired by [colors-tmpl](https://npmjs.org/package/colors-tmpl)
+
   Example: {red}:this is red{/red}
 
 * XCOLOR {{@KEY}}@TEXT{{/@KEY}}
+
   Inspired by [xcolor](https://npmjs.org/package/xcolor)
+
   Example: {{red}}:this is red{{/red}}
 
 
@@ -142,15 +156,19 @@ Currently the following codes are supported:
 	* reset
 	* bold
 	* boldOff
+	
 	  (automatic when using a tag format with closings)
 	* faint
 	* faintOff
+	
 	  (automatic when using a tag format with closings)
 	* underline
 	* underlineOff
+	
 	  (automatic when using a tag format with closings)
 	* inverse
 	* inverseOff
+	
 	  (automatic when using a tag format with closings)
 
 ## Examples
