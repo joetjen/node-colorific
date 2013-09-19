@@ -8,7 +8,7 @@ var util = require('util');
 var log    = console.log;
 var format = util.format;
 
-var VERBOSE = true;
+var VERBOSE = false;
 
 /**
  * Functions

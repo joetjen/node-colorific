@@ -11,6 +11,16 @@ var _ = require('underscore');
 var CSI = '\x1b';
 
 var ANSI = {
+    'reset':        [ 0,  0],
+    'bold':         [ 1, 22],
+    'boldOff':      [22, 22],
+    'faint':        [ 2, 22],
+    'faintOff':     [22, 22],
+    'underline':    [ 4, 24],
+    'underlineOff': [24, 24],
+    'inverse':      [ 7, 27],
+    'inverseOff':   [27, 27],
+
     // foreground colors
     'black':     [30, 39],
     'red':       [31, 39],
@@ -34,7 +44,13 @@ var ANSI = {
     'defaultBg': [49, 49]
 };
 
-var TAGFORMAT = '@@KEY:@TEXT';
+var COLORIFIC      = '@@KEY:@TEXT';
+var COLOR_TERMINAL = '%@KEY@TEXT';
+var STYISH         = '#{@KEY \'@TEXT\'}';
+var SGML           = '<@KEY>@TEXT</@KEY>';
+var CURLY_COLORS   = '<{@KEY>@TEXT<}>';
+var COLORS_TMPL    = '{@KEY}@TEXT{/@KEY}';
+var XCOLOR         = '{{@KEY}}@TEXT{{/@KEY}}';
 
 /**
  *
@@ -63,11 +79,13 @@ var regExpcape = function(s) {
 
 var openingTag = function(s) {
     return regExpcape(s)
-        .replace(/@KEY/, ['(', sortedKeys(ANSI).join('|'), ')'].join(''));
+        .replace(/@KEY/, ['(', sortedKeys(ANSI).join('|'), ')'].join(''))
+        .replace(/\s+/,  '\\s+');
 };
 
 var closingTag = function(s) {
-    return regExpcape(s);
+    return regExpcape(s)
+        .replace(/\s+/,  '\\s+');
 };
 
 var regExpify = function(s) {
@@ -96,21 +114,37 @@ var decodeANSI = function(matcher, str) {
     var s = str;
     var r = '';
     var c = [];
-    for (var match = matcher[0].exec(s); match; match = matcher[1].exec(s)) {
+    var m = matcher[0];
+    var k = /@KEY/.test(matcher[1].toString());
+    for (var match = m.exec(s); match; match = m.exec(s)) {
         var t;
         if (!matcher[0].test(match[0])) {
-            t = c.length ? c.pop() : match[0];
+            if (c.length > 0) {
+                var x = c.pop();
+                t = x[0];
+                m = !k ? matcher[1] : x[1];
+            }
+            else {
+                t = match[0];
+                m = matcher[1];
+            }
         }
         else {
+            var y = m;
             t = ansi[match[1]][0];
-            c.push(ansi[match[1]][1]);
+            m = !k ? matcher[1] : regExpify(
+                matcher[1]
+                    .toString()
+                    .replace(/(^\/|\/$)/g, '')
+                    .replace('@KEY', match[1]));
+            c.push([ansi[match[1]][1], y]);
         }
         r += match.input.substr(0, match.index);
         r += t;
         s  = match.input.substr(match.index + match[0].length);
     }
     r += s;
-    while (c.length) r += c.pop();
+    while (c.length) r += c.pop()[0];
     return r;
 };
 
@@ -177,7 +211,7 @@ var colorific = function(matcher, str) {
  * Initialize module
  */
 
-var matcher = createRegExp(TAGFORMAT);
+var matcher = createRegExp(COLORIFIC);
 var ansi    = createANSI(ANSI);
 
 /**
@@ -186,4 +220,6 @@ var ansi    = createANSI(ANSI);
 
 module.exports = _.partial(colorific, matcher);
 
-console.log(module.exports('@black:a string @blackBg:with @red:red@default:, @green:green @default:@yellowBg:and @blue:blue @default:on yellow background'));
+// console.log(matcher);
+// console.log(module.exports("<red>this <blue>should</red> be red</red> and this not"));
+// process.exit();
