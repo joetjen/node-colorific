@@ -21,18 +21,17 @@ var using = helper.using;
     for (var i = 0; i < repeat; ++i) f();
     var e = new Date();
     return e.getTime() - s.getTime();
- }
+ };
 
 using(cc, function(p) {
-    p('this is @black:a black string');
-    p('this is @red:a red string');
-    p('this is @green:a green string');
-    p('this is @yellow:a yellow string');
-    p('this is @magenta:a magenta string @red:red ... @default:default again');
+    p('@red:this is a red string');
+    p('a string with @red:red @default:and @blue:blue');
 });
 
-var t = time(1000000, function() {
-    cc('this is @magenta:a magenta string @red:red ... @default:default again');
-});
+// var i = 1000000;
+// var t = time(i, function() {
+//     cc('this is @magenta:a magenta string @red:red ... @default:default again');
+// });
 
-console.log(t);
+// console.log(t);
+// console.log(t/i);

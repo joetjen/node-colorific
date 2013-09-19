@@ -83,7 +83,7 @@ describe('simple color encodings', function() {
         it('should return a default string', function() {
             var result = cc('@default:a default string');
             expect(result)
-                .toEqual('\x1b[39ma default string\x1b[39m');
+                .toEqual('\x1b[39ma default string');
         });
     });
 
@@ -139,15 +139,35 @@ describe('simple color encodings', function() {
         it('should return a string with default background', function() {
             var result = cc('@defaultBg:a string with default background');
             expect(result)
-                .toEqual('\x1b[49ma string with default background\x1b[49m');
+                .toEqual('\x1b[49ma string with default background');
         });
     });
 
     describe('multiple, unnested color ecodings', function() {
         it('should return a string with red and blue', function() {
-            var result = cc('a string with @red:red and @blue:blue');
+            var result = cc('a string with @red:red @default:and @blue:blue');
             expect(result)
-                .toEqual('a string with \x1b[31mred and \x1b[34mblue\x1b[39m');
+                .toEqual('a string with \x1b[31mred \x1b[39mand \x1b[34mblue\x1b[39m');
+        });
+
+        it('should return a string with red, green and blue', function() {
+            var result = cc('a string with @red:red@default:, @green:green @default:and @blue:blue');
+            expect(result)
+                .toEqual('a string with \x1b[31mred\x1b[39m, \x1b[32mgreen \x1b[39mand \x1b[34mblue\x1b[39m');
+        });
+    });
+
+    describe('multiple, nested color ecodings', function() {
+        it('should return a string with red and blue on yellow background', function() {
+            var result = cc('@yellowBg:a string with @red:red @default:and @blue:blue @default:on yellow background');
+            expect(result)
+                .toEqual('\x1b[43ma string with \x1b[31mred \x1b[39mand \x1b[34mblue \x1b[39mon yellow background\x1b[49m');
+        });
+
+        it('should return a string with red, green and blue on yellow background', function() {
+            var result = cc('@yellowBg:a string with @red:red@default:, @green:green @default:and @blue:blue @default:on yellow background');
+            expect(result)
+                .toEqual('\x1b[43ma string with \x1b[31mred\x1b[39m, \x1b[32mgreen \x1b[39mand \x1b[34mblue \x1b[39mon yellow background\x1b[49m');
         });
     });
 });

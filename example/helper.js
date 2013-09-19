@@ -16,7 +16,7 @@ var VERBOSE = true;
 
 var colorPrint = function(f, s) {
     var x = format.apply(this, _.flatten([s, _.rest(arguments, 2)]));
-    var y = f(x)
+    var y = f(x);
     if (VERBOSE) {
         log('s   ', [s]);
         log('x   ', [x]);

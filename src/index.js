@@ -34,7 +34,7 @@ var ANSI = {
     'defaultBg': [49, 49]
 };
 
-var TAGFORMAT = '@@KEY:';
+var TAGFORMAT = '@@KEY:@TEXT';
 
 /**
  *
@@ -86,13 +86,13 @@ var csisify = function(code) {
     return [CSI, '[', code, 'm'].join('');
 };
 
-var createAnsi = function(CODES) {
+var createANSI = function(CODES) {
     return _.reduce(CODES, function(o, v, k) {
         return _.extend(o, _.object([k], [[csisify(v[0]), csisify(v[1])]]));
     }, {});
 };
 
-var colorific = function(matcher, str) {
+var decodeANSI = function(matcher, str) {
     var s = str;
     var r = '';
     var c = [];
@@ -114,18 +114,76 @@ var colorific = function(matcher, str) {
     return r;
 };
 
+_.mixin({
+    'replaceAll': function(str, re, sub) {
+        var s = str;
+        while (re.test(s)) s = s.replace(re, sub);
+        return s;
+    }
+});
+
+var COMPRESS = {
+    // compact multiple codes into a color separated list
+    'shrink': [
+        /(\x1b\[\d+(?:;\d+)*)m\x1b\[(\d+(?:;\d+)*m)/,
+        '$1;$2'
+    ],
+    // remove duplicate codes within a list
+    'dedupe': [
+        /(\x1b\[)((?:\d+;)*?)(\d+)((?:;\d+)*?);\3((?:;\d+)*m)/,
+        '$1$2$3$5'
+    ],
+    // remove same code with only text in between
+    'trash1': [
+        /(\x1b\[(?:\d+;)*(\d+)(?:;\d)*m)([^\x1b]*)(\x1b\[)((?:\d+;)*)\2((?:;\d+)*m)/,
+        '$1$3$4$5$6'
+    ],
+    // remove left over colons from lists
+    'trash2': [
+        /(\x1b\[)((?:\d+;)*);((?:;\d+)*m)/,
+        '$1$2$3'
+    ],
+    // remove left over colons at the start of lists
+    'trash3': [
+        /(\x1b\[);((?:\d+;)*)(\d+m)/,
+        '$1$2$3'
+    ],
+    // remove empty lists
+    'trash4': [
+        /\x1b\[m/,
+        ''
+    ]
+};
+
+var compressANSI = function(str) {
+    var s = str;
+    s = _.chain(s)
+            .replaceAll(COMPRESS.shrink[0],  COMPRESS.shrink[1])
+            .replaceAll(COMPRESS.dedupe[0],  COMPRESS.dedupe[1])
+            .replaceAll(COMPRESS.trash1[0],  COMPRESS.trash1[1])
+            .replaceAll(COMPRESS.trash2[0],  COMPRESS.trash2[1])
+            .replaceAll(COMPRESS.trash3[0],  COMPRESS.trash3[1])
+            .replaceAll(COMPRESS.trash4[0],  COMPRESS.trash4[1])
+            .value();
+    return s;
+};
+
+var colorific = function(matcher, str) {
+    return compressANSI(decodeANSI(matcher, str));
+};
+
 
 /**
  * Initialize module
  */
 
 var matcher = createRegExp(TAGFORMAT);
-var ansi    = createAnsi(ANSI);
-
-// log('ansi', ansi);
+var ansi    = createANSI(ANSI);
 
 /**
  * Exports
  */
 
 module.exports = _.partial(colorific, matcher);
+
+console.log(module.exports('@black:a string @blackBg:with @red:red@default:, @green:green @default:@yellowBg:and @blue:blue @default:on yellow background'));

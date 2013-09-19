@@ -5,8 +5,7 @@
       "folder_exclude_patterns": [
         ".git",
         "node_modules",
-        "lib",
-        "min"
+        "lib"
       ],
       "file_exclude_patterns": [
         "*.sublime-*"
