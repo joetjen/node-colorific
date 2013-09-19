@@ -2,7 +2,8 @@
 
 Text coloring (with ANSI) for Node.js.
 
-This package was heavily inspiried by Muslim-Idris/node-curly-colors and
+This package was heavily inspiried by
+Muslim Idris' node-curly-colors](https://npmjs.org/package/curly-colors) and
 several other ANSI/Color - specific packages available on the npm repository.
 
 The reason - for me - to write yet another coloring package was that I
@@ -155,21 +156,15 @@ Currently the following codes are supported:
 * Miscellaneous Styles
 	* reset
 	* bold
-	* boldOff
-	
-	  (automatic when using a tag format with closings)
 	* faint
-	* faintOff
-	
-	  (automatic when using a tag format with closings)
 	* underline
-	* underlineOff
-	
-	  (automatic when using a tag format with closings)
 	* inverse
-	* inverseOff
 	
-	  (automatic when using a tag format with closings)
+* Automatic when using a tag format with closings
+	* boldOff
+	* faintOff
+	* underlineOff
+	* inverseOff
 
 ## Examples
 
