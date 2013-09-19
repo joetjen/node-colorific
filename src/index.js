@@ -206,20 +206,27 @@ var colorific = function(matcher, str) {
     return compressANSI(decodeANSI(matcher, str));
 };
 
+var create = function(tagFormat) {
+    return _.partial(colorific, createRegExp(tagFormat));
+};
 
 /**
  * Initialize module
  */
-
-var matcher = createRegExp(COLORIFIC);
-var ansi    = createANSI(ANSI);
+var ansi = createANSI(ANSI);
 
 /**
  * Exports
  */
 
-module.exports = _.partial(colorific, matcher);
+exports = module.exports = create(COLORIFIC);
 
-// console.log(matcher);
-// console.log(module.exports("<red>this <blue>should</red> be red</red> and this not"));
-// process.exit();
+exports.create = create;
+
+exports.COLORIFIC      = COLORIFIC;
+exports.COLOR_TERMINAL = COLOR_TERMINAL;
+exports.STYISH         = STYISH;
+exports.SGML           = SGML;
+exports.CURLY_COLORS   = CURLY_COLORS;
+exports.COLORS_TMPL    = COLORS_TMPL;
+exports.XCOLOR         = XCOLOR;
