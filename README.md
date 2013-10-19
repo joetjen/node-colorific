@@ -159,7 +159,7 @@ Currently the following codes are supported:
 	* faint
 	* underline
 	* inverse
-	
+
 * Automatic when using a tag format with closings
 	* boldOff
 	* faintOff
@@ -168,7 +168,7 @@ Currently the following codes are supported:
 
 ## Examples
 
-![colorific terminal output](http://screencloud.net/img/screenshots/fea9e35a8ce98a419e87cb03fd6167ca.png "Exemplary colorifc output")
+![colorific terminal output](https://dl.dropboxusercontent.com/u/4775364/node-colorific.png "Exemplary colorifc output")
 
 Also check the index.js in the example directory which generates the above output.
 
