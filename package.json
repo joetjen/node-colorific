@@ -37,7 +37,7 @@
 
     "scripts": {
         "test":     "node_modules/.bin/jasmine-node                         --captureExceptions --verbose spec/",
-        "autotest": "node_modules/.bin/jasmine-node --autotest --watch src/ --coffee --captureExceptions --verbose spec/",
+        "autotest": "node_modules/.bin/jasmine-node --autotest --watch src/ --captureExceptions --verbose spec/",
         "watch":    "echo no watch script available!",
         "start":    "echo no start script available!",
         "stop":     "echo no stop script available!",
