@@ -1,65 +1,61 @@
 {
-    "name":    "colorific",
-    "version": "0.1.1",
-    "private": false,
+  "name":    "colorific",
+  "version": "0.1.1",
+  "private": false,
 
-    "author":      "Jan Oetjen <oetjenj@gmail.com> (http://phexter.net)",
-    "description": "Text coloring (with ANSI) for nodejs",
-    "homepage":    "https://github.com/joetjen/node-colorific",
+  "author":      "Jan Oetjen <oetjenj@gmail.com> (http://phexter.net)",
+  "description": "Text coloring (with ANSI) for nodejs",
+  "homepage":    "https://github.com/joetjen/node-colorific",
 
-    "contributors": {},
+  "contributors": {},
 
-    "main":    "./src",
-    "license": "MIT",
+  "main":    "./src",
+  "license": "MIT",
 
-    "bin": {},
+  "bin": {},
 
-    "directories":{
-        "bin": "./bin",
-        "lib": "./lib",
-        "src": "./src",
-        "doc": "./doc"
-    },
+  "directories": {
+    "bin": "./bin",
+    "lib": "./lib",
+    "src": "./src",
+    "doc": "./doc"
+  },
 
-    "dependencies": {
-        "underscore": ">= 1.5.x"
-    },
+  "dependencies": {
+    "underscore": ">= 1.5.x"
+  },
 
-    "devDependencies": {
-        "uglify-js":     ">= 2.4.x",
-        "jasmine-node":  ">= 1.10.x"
-    },
+  "devDependencies": {
+    "uglify-js": ">= 2.4.x",
+    "mocha":     ">= 1.16.x"
+  },
 
-    "engines": {
-        "node": ">= 0.10.x",
-        "npm":  ">= 1.3.x"
-    },
+  "engines": {
+    "node": ">= 0.10.x",
+    "npm":  ">= 1.3.x"
+  },
 
-    "scripts": {
-        "test":     "node_modules/.bin/jasmine-node                         --captureExceptions --verbose spec/",
-        "autotest": "node_modules/.bin/jasmine-node --autotest --watch src/ --captureExceptions --verbose spec/",
-        "watch":    "echo no watch script available!",
-        "start":    "echo no start script available!",
-        "stop":     "echo no stop script available!",
-        "restart":  "echo no restart script available!",
-        "example":  "node example"
-    },
+  "scripts": {
+    "test":     "node_modules/.bin/jasmine-node                         --captureExceptions --verbose spec/",
+    "autotest": "node_modules/.bin/jasmine-node --autotest --watch src/ --captureExceptions --verbose spec/",
+    "watch":    "echo no watch script available!",
+    "start":    "echo no start script available!",
+    "stop":     "echo no stop script available!",
+    "restart":  "echo no restart script available!",
+    "example":  "node example"
+  },
 
-    "repository": {
-        "type": "git",
-        "url":  "git://github.com/joetjen/node-colorific.git"
-    },
+  "repository": {
+    "type": "git",
+    "url":  "git://github.com/joetjen/node-colorific.git"
+  },
 
-    "bugs": {
-        "url":   "https://github.com/joetjen/node-colorific/issues",
-        "email": "oetjenj@gmail.com"
-    },
+  "bugs": {
+    "url":   "https://github.com/joetjen/node-colorific/issues",
+    "email": "oetjenj@gmail.com"
+  },
 
-    "keywords": [
-        "ansi",
-        "colorize",
-        "colors",
-        "color",
-        "console"
-    ]
+  "keywords": [
+    "ansi", "colorize", "colors", "color", "console"
+  ]
 }
