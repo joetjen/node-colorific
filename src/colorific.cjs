@@ -146,11 +146,11 @@ const decodeANSI = (matcher, str) => {
   return r;
 };
 
-
-const chain = ((replaceAll) => (x) => ({
-  replaceAll: (...args) => replaceAll(x, ...args),
-  value: () => x,
-}))((s, re, sub) => {
+const chain = ((replaceAll) =>
+  (x) => ({
+    replaceAll: (...args) => replaceAll(x, ...args),
+    value: () => x,
+  }))((s, re, sub) => {
   while (re.test(s)) {
     s = s.replace(re, sub);
   }
@@ -160,17 +160,30 @@ const chain = ((replaceAll) => (x) => ({
 
 const compressANSI = (str) =>
   chain(str)
-  .replaceAll(...COMPRESS.shrink)
-  .replaceAll(...COMPRESS.dedupe)
-  .replaceAll(...COMPRESS.trash1)
-  .replaceAll(...COMPRESS.trash2)
-  .replaceAll(...COMPRESS.trash3)
-  .replaceAll(...COMPRESS.trash4)
-  .value();
+    .replaceAll(...COMPRESS.shrink)
+    .replaceAll(...COMPRESS.dedupe)
+    .replaceAll(...COMPRESS.trash1)
+    .replaceAll(...COMPRESS.trash2)
+    .replaceAll(...COMPRESS.trash3)
+    .replaceAll(...COMPRESS.trash4)
+    .value();
 
-const colorific = (matcher, str) => compressANSI(decodeANSI(matcher, str));
+const colorific = (matcher, str) =>
+  compressANSI(decodeANSI(matcher, str));
 
-const create = (tagFormat) => ((matcher) => (str) => colorific(matcher, str))(createRegExp(tagFormat));
+const create = (tagFormat) =>
+  ((matcher) =>
+    (strs, ...args) => {
+      let str = strs;
+
+      if (Array.isArray(strs)) {
+        str = strs
+          .map((v, i) => v + (args[i] || ''))
+          .join('');
+      }
+
+      return colorific(matcher, str);
+    })(createRegExp(tagFormat));
 
 /**
  * Exports

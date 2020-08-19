@@ -29,6 +29,23 @@ describe('simple strings', function () {
   });
 });
 
+describe('different invocation methods', function () {
+  it('should be callable as function', function () {
+    const source = cc('Sometime I want my text to be @red:red!');
+    const result = 'Sometime I want my text to be \x1b[31mred!\x1b[39m';
+
+    expect(result)
+      .to.equal(source);
+  });
+  it('should be callable as template string', function () {
+    const source = cc`Sometime I want my text to be @red:red!`;
+    const result = 'Sometime I want my text to be \x1b[31mred!\x1b[39m';
+
+    expect(result)
+      .to.equal(source);
+  });
+});
+
 describe('simple color encodings', function () {
   describe('basic forground color support', function () {
     it('should return a black string', function () {
