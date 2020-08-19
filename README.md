@@ -170,7 +170,7 @@ Currently the following codes are supported:
 
 ![colorific terminal output](https://dl.dropboxusercontent.com/u/4775364/node-colorific.png "Exemplary colorifc output")
 
-Also check the index.js in the example directory which generates the above output.
+Also check the index.mjs in the example directory which generates the above output.
 
 ## License
 

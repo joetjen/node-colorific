@@ -6,34 +6,32 @@
   "description": "Text coloring (with ANSI) for nodejs",
   "homepage": "https://github.com/joetjen/node-colorific",
   "contributors": {},
-  "main": "./src",
+  "type": "module",
+  "main": "./src/colorific.cjs",
+  "exports": {
+    "import": "./src/colorific.js",
+    "default": "./src/colorific.cjs"
+  },
   "license": "MIT",
   "bin": {},
   "directories": {
-    "bin": "./bin",
-    "lib": "./lib",
-    "src": "./src",
-    "doc": "./doc"
+    "src": "./src"
   },
-  "dependencies": {
-    "lodash": "^4.17.20"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "uglify-js": ">= 2.4.x",
-    "mocha": ">= 1.16.x"
+    "auto-changelog": "^2.2.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.1.1"
   },
   "engines": {
     "node": ">= 0.12.x",
     "npm": ">= 6.14.x"
   },
   "scripts": {
-    "test": "echo no watch script available!",
-    "autotest": "echo no watch script available!",
-    "watch": "echo no watch script available!",
-    "start": "echo no start script available!",
-    "stop": "echo no stop script available!",
-    "restart": "echo no restart script available!",
-    "example": "node example"
+    "version": "npx auto-changelog --package --template keepachangelog && git add CHANGELOG.md",
+    "test": "npx mocha spec/",
+    "autotest": "npx mocha --watch spec/",
+    "example": "node example/color-table.js"
   },
   "repository": {
     "type": "git",
