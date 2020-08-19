@@ -2,65 +2,46 @@
  * Module dependencies
  */
 
-var _ = require('underscore');
-var helper = require('./helper');
+var _ = require('lodash');
 var cc = require('../lib');
 
 /**
- * Shortcuts
+ * Constants
  */
 
-var using = helper.using;
+const ATTRIBUTES = ['default', 'bold', 'faint', 'underline', 'inverse'];
+const COLORS     = ['default', 'black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'];
+const BGCOLORS   = _.map(COLORS, (x) => `${x}Bg`);
+
+/**
+ * Functions
+ */
+
+const print = (x) => console.log(cc(x));
+
+const pad = (x) => _.padEnd(` ${x} `, 13, ' ');
+const colorize = (x) => `@${x}:${pad('Aa Bb Cc Dd')}@defaultBg:`;
+
+const line = (f, cols, before = '@default:', after = '@reset:' ) =>
+  _.reduce(cols, (acc, col) =>
+    `${acc} ${before}${f(col)}${after}`, '');
+
+const printMatrix = (rows, cols) => {
+  print(`@reset:@default:@defaultBg:${pad('')} ${line(pad, cols, '', '')}`);
+
+  _.each(rows, (row) => print(`@reset:@${row}:${pad(row)}@reset: ${line(colorize, cols, `@${row}:`)}`));
+};
 
 /**
  * Main
  */
 
-var time = function (repeat, f) {
-  var s = new Date();
-  for (var i = 0; i < repeat; ++i) {
-    f();
-  }
-  var e = new Date();
-  return e.getTime() - s.getTime();
-};
+console.log();
 
-using(cc, function (p) {
-  var x;
+printMatrix(COLORS, BGCOLORS);
 
-  x = ' Aa Bb Cc Dd  ' + '@blackBg: Aa Bb Cc Dd @defaultBg: ' + '@redBg: Aa Bb Cc Dd @defaultBg: ' + '@greenBg: Aa Bb Cc Dd @defaultBg: ' + '@yellowBg: Aa Bb Cc Dd @defaultBg: ' + '@blueBg: Aa Bb Cc Dd @defaultBg: ' + '@magentaBg: Aa Bb Cc Dd @defaultBg: ' + '@cyanBg: Aa Bb Cc Dd @defaultBg: ' + '@whiteBg: Aa Bb Cc Dd @defaultBg: ';
+console.log();
 
-  p('              defaultBg    blackBg       redBg         greenBg       yellowBg      blueBg        magentaBg     cyanBg        whiteBg');
-  p('    ' + '@black:black    ' + x);
-  p('    ' + '@red:red      ' + x);
-  p('    ' + '@green:green    ' + x);
-  p('    ' + '@yellow:yellow   ' + x);
-  p('    ' + '@blue:blue     ' + x);
-  p('    ' + '@magenta:magenta  ' + x);
-  p('    ' + '@cyan:cyan     ' + x);
-  p('    ' + '@white:white    ' + x);
+printMatrix(COLORS, ATTRIBUTES);
 
-  console.log();
-
-  x = ' Aa Bb Cc Dd  ' + '@bold: Aa Bb Cc Dd @boldOff: ' + '@faint: Aa Bb Cc Dd @faintOff: ' + '@underline: Aa Bb Cc Dd @underlineOff: ' + '@inverse: Aa Bb Cc Dd @inverseOff: ';
-
-  p('              default       bold          faint        underline     inverse');
-  p('    ' + '@black:black    ' + x);
-  p('    ' + '@red:red      ' + x);
-  p('    ' + '@green:green    ' + x);
-  p('    ' + '@yellow:yellow   ' + x);
-  p('    ' + '@blue:blue     ' + x);
-  p('    ' + '@magenta:magenta  ' + x);
-  p('    ' + '@cyan:cyan     ' + x);
-  p('    ' + '@white:white    ' + x);
-
-  console.log();
-});
-
-// var i = 1000000;
-// var t = time(i, function() {
-//     cc('this is @magenta:a magenta string @red:red ... @default:default again');
-// });
-
-// console.log(t);
-// console.log(t/i);
+console.log();
