@@ -17,13 +17,11 @@ different styles. So instead of inventing yet another fixed format library I
 tried to enable all kinds of custom format supporting - almost - every format
 that is currently already available.
 
-## TODOs
-
-- [ ] implement some kind of theming
-
 ## Installation
 
-	$ npm install colorific
+    $ npm install --save colorific
+    
+    $ yarn add colorific
 
 ## How to include
 
@@ -31,20 +29,37 @@ To use the default (Colorific) tag format (see below for more information),
 simply require the package as usual.
 
 ```js
-	var cc = require('colorific');
+  var cc = require('colorific');
+
+  // -or-
+
+  import cc from 'colorific';
 ```
 
 You can however also use a different tag format using the following format:
 
 ```js
-	var cc = require('colorific').create('#@KEY[@TEXT]');
+  var cc = require('colorific').create('#@KEY[@TEXT]');
+
+  // -or-
+
+  import { create } from 'colorific';
+
+  const cc = create('#@KEY[@TEXT]');
+
 ```
 
 If you like to use one of the already predefined tag formats simply do:
 
 ```js
-	var colorific = require('colorific');
-	var cc        = colorific.create(colorific.CURLY_COLORS);
+  var colorific = require('colorific');
+  var cc        = colorific.create(colorific.CURLY_COLORS);
+
+  // -or-
+
+  import { create, CURLY_COLORS } from 'colorific';
+
+  const cc = create(CURLY_COLORS);
 ```
 
 ## How to use
@@ -54,17 +69,42 @@ convert the ANSI codes embedded into a String to their correct ANSI
 representation. For example:
 
 ```js
-	var s = "Sometime I want my text to be @red:red!";
+  var s = 'Sometime I want my text to be @red:red!';
 
-	console.log(cc(s));
+  console.log(cc(s));
+
+  // -or-
+
+  const s = 'Sometime I want my text to be @red:red!';
+
+  console.log(cc(s));
+
+  // -or-
+
+  const s = cc`Sometime I want my text to be @red:red!`;
+
+  console.log(s);
+
 ```
 
 If you have a `printf`-like formatted string simply do some like this:
 
 ```js
-	var s = "Sometimes I want my %s to be @red:%s!";
+  var s = 'Sometimes I want my %s to be @red:%s!';
 
-	console.log(cc(s), "text", "red");
+  console.log(cc(s), "text", "red");
+
+  // -or-
+
+  const s = 'Sometimes I want my %s to be @red:%s!';
+  
+  console.log(cc(s), "text", "red");
+
+  // -or-
+
+  const s = cc`Sometimes I want my %s to be @red:%s!`;
+  
+  console.log(s, "text", "red");
 ```
 
 ## (Predefined) Tag Formats
@@ -168,9 +208,7 @@ Currently the following codes are supported:
 
 ## Examples
 
-![colorific terminal output](https://dl.dropboxusercontent.com/u/4775364/node-colorific.png "Exemplary colorifc output")
-
-Also check the index.js in the example directory which generates the above output.
+Check the color-table.js in the example directory which generates a color table output.
 
 ## License
 

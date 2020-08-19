@@ -1,65 +1,51 @@
 {
-    "name":    "colorific",
-    "version": "0.1.1",
-    "private": false,
-
-    "author":      "Jan Oetjen <oetjenj@gmail.com> (http://phexter.net)",
-    "description": "Text coloring (with ANSI) for nodejs",
-    "homepage":    "https://github.com/joetjen/node-colorific",
-
-    "contributors": {},
-
-    "main":    "./src",
-    "license": "MIT",
-
-    "bin": {},
-
-    "directories":{
-        "bin": "./bin",
-        "lib": "./lib",
-        "src": "./src",
-        "doc": "./doc"
-    },
-
-    "dependencies": {
-        "underscore": ">= 1.5.x"
-    },
-
-    "devDependencies": {
-        "uglify-js":     ">= 2.4.x",
-        "jasmine-node":  ">= 1.10.x"
-    },
-
-    "engines": {
-        "node": ">= 0.10.x",
-        "npm":  ">= 1.3.x"
-    },
-
-    "scripts": {
-        "test":     "node_modules/.bin/jasmine-node                         --captureExceptions --verbose spec/",
-        "autotest": "node_modules/.bin/jasmine-node --autotest --watch src/ --coffee --captureExceptions --verbose spec/",
-        "watch":    "echo no watch script available!",
-        "start":    "echo no start script available!",
-        "stop":     "echo no stop script available!",
-        "restart":  "echo no restart script available!",
-        "example":  "node example"
-    },
-
-    "repository": {
-        "type": "git",
-        "url":  "git://github.com/joetjen/node-colorific.git"
-    },
-
-    "bugs": {
-        "url":   "https://github.com/joetjen/node-colorific/issues",
-        "email": "oetjenj@gmail.com"
-    },
-
-    "keywords": [
-        "ansi",
-        "colorize",
-        "colors",
-        "color",
-        "console"
-    ]
+  "name": "colorific",
+  "version": "0.1.2",
+  "private": false,
+  "author": "Jan Oetjen <oetjenj@gmail.com> (http://phexter.net)",
+  "description": "Text coloring (with ANSI) for nodejs",
+  "homepage": "https://github.com/joetjen/node-colorific",
+  "contributors": {},
+  "type": "module",
+  "main": "./src/colorific.cjs",
+  "exports": {
+    "import": "./src/colorific.js",
+    "default": "./src/colorific.cjs"
+  },
+  "license": "MIT",
+  "bin": {},
+  "directories": {
+    "src": "./src"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "auto-changelog": "^2.2.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.1.1"
+  },
+  "engines": {
+    "node": ">= 0.12.x",
+    "npm": ">= 6.14.x"
+  },
+  "scripts": {
+    "version": "npx auto-changelog --package --template keepachangelog && git add CHANGELOG.md",
+    "test": "npx mocha spec/",
+    "autotest": "npx mocha --watch spec/",
+    "example": "node example/color-table.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/joetjen/node-colorific.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joetjen/node-colorific/issues",
+    "email": "oetjenj@gmail.com"
+  },
+  "keywords": [
+    "ansi",
+    "colorize",
+    "colors",
+    "color",
+    "console"
+  ]
 }
