@@ -1,6 +1,6 @@
 {
   "name": "colorific",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "author": "Jan Oetjen <oetjenj@gmail.com> (http://phexter.net)",
   "description": "Text coloring (with ANSI) for nodejs",
